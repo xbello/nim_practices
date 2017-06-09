@@ -7,3 +7,13 @@
 # 6 75 3 25 50 100 952
 # Outputs
 # 100 + 6 * 3 * 75 - 50 / 25 = 952
+#
+import strutils
+
+echo "Input six integers and the target: "
+var input: seq[string] = split(readLine(stdin))
+assert len(input) == 7
+
+var numbers: seq[int] = @[]
+for number in input:
+  numbers.add(parse_int(number))
