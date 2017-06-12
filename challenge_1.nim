@@ -21,19 +21,20 @@ for number in input:
 var user_nums: seq[int] = numbers[0..^2]
 var target: int = numbers[numbers.len - 1]
 
-proc A(a, b: int): int =
-  a + b
-proc S(a, b: int): int =
-  a - b
-proc M(a, b: int): int =
-  a * b
-proc D(a, b: int): int =
-  a div b
+type
+  Result = tuple[name: string, res: int]
 
-proc execute(operands: seq[int], operation: proc): int =
-  operation(operands[0], operands[1])
+proc A(a, b: int): Result =
+  var r: Result = ("+", a + b)
+  return r
 
-var ops: seq[proc] = @[A, S, M, D]
+proc R(a, b: int): Result =
+  var r: Result = ("-", a - b)
+  return r
 
-for op in ops:
-    echo execute(user_nums[0..2], op)
+proc execute(operands: seq[int], ops: seq[proc]): Result =
+  for op in ops:
+    echo operands[0]
+    echo op(operands[0], operands[1])
+
+discard execute(user_nums[0..2], @[A, R])
